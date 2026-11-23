@@ -1,6 +1,6 @@
 :root {
-	--text: #1f1d06;
-	--text-h: #441f00;
+	--text: #192508;
+	--text-h: #311803;
 	--bg: #331408;
 	--border: #e5e4e7;
 	--code-bg: #f4f3ec;
@@ -13,14 +13,13 @@
 	--font-heading: 'Cinzel', serif;
 	--font-body: 'EB Garamond', Georgia, serif;
 
-	font: 18px/145% var(--font-main);
-	letter-spacing: 0.3rem;
+	font: 18px var(--font-body);
+	letter-spacing: 0.1rem;
 	color: var(--text);
-	background-image: url(/public/images/paper-texture.jpg);
+	background-image: url(/images/paper-texture.jpg);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
-	background-attachment: fixed;
 
 	@media (max-width: 1024px) {
 		font-size: 16px;
@@ -44,15 +43,15 @@ body {
 
 h1,
 h2 {
-	font-family: var(--heading);
+	font-family: var(--font-heading);
 	font-weight: 500;
 	color: var(--text-h);
 }
 
 h1 {
 	font-size: clamp(2.25rem, 8vw, 6rem);
-	letter-spacing: 0.1rem;
-	margin: 32px 0 0 clamp(1rem, 10vw, 150px);
+	margin: 32px clamp(1rem, 5vw, 150px) 0 clamp(1rem, 10vw, 150px);
+
 	@media (max-width: 1024px) {
 		margin: 20px 1.5rem;
 	}
@@ -66,6 +65,15 @@ h2 {
 	letter-spacing: 0.1rem;
 	margin: 0 0 8px;
 }
+
+h3 {
+	font-size: 1.6rem;
+}
+
+h4 {
+	font-size: 1.2rem;
+}
 p {
+	font-size: 1.3rem;
 	margin: 0;
 }

@@ -1,0 +1,18 @@
+.btn {
+	padding: 0.25rem 1rem;
+	max-width: 150px;
+	border: none;
+	border-radius: 15px;
+	cursor: pointer;
+	font: inherit;
+}
+
+.btn-primary {
+	background: #6d0d9993;
+	color: #ffffff;
+}
+
+.btn-danger {
+	background: rgb(177, 57, 21);
+	color: #ffffff;
+}

@@ -2,9 +2,14 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import SpellForm from './components/SpellForm';
 import Button from './components/Button';
-const STATUS_IN_PROGRESS = 'brewing';
-const STATUS_DONE = 'mastered';
-
+import {
+	STATUS_IN_PROGRESS,
+	STATUS_DONE,
+	addSpell,
+	completeSpell,
+	deleteSpell,
+	countCompletedSpells
+} from './spellLogic';
 function App() {
 	const [tasks, setTasks] = useState(() => {
 		try {
@@ -18,15 +23,15 @@ function App() {
 		localStorage.setItem('tasks', JSON.stringify(tasks));
 	}, [tasks]);
 
-	function addSpell({ title, description }) {
-		setTasks([...tasks, { id: crypto.randomUUID(), title, description, status: STATUS_IN_PROGRESS }]);
+	function handleAdd(spell) {
+		setTasks((prev) => addSpell(prev, spell));
 	}
-	function completeSpell(id) {
-		setTasks(tasks.map((t) => (t.id === id ? { ...t, status: STATUS_DONE } : t)));
+	function handleComplete(id) {
+		setTasks((prev) => completeSpell(prev, id));
 	}
 
-	function deleteSpell(id) {
-		setTasks(tasks.filter((t) => t.id !== id));
+	function handleDelete(id) {
+		setTasks((prev) => deleteSpell(prev, id));
 	}
 
 	return (
@@ -43,7 +48,7 @@ function App() {
 								</li>
 							))}
 						</ul>
-						<h3>Mastered Spells</h3>
+						<h3>Mastered Spells ({countCompletedSpells(tasks)})</h3>
 						<ul className="spell-list">
 							{tasks
 								.filter((t) => t.status === STATUS_DONE)
@@ -54,7 +59,7 @@ function App() {
 										</h4>
 										<p>{t.description}</p>
 										<div className="btn-group">
-											<Button variant="danger" onClick={() => deleteSpell(t.id)}>
+											<Button variant="danger" onClick={() => handleDelete(t.id)}>
 												Delete
 											</Button>
 										</div>
@@ -73,8 +78,8 @@ function App() {
 										</h4>
 										<p>{t.description}</p>
 										<div className="btn-group">
-											<Button onClick={() => completeSpell(t.id)}>Master</Button>
-											<Button onClick={() => deleteSpell(t.id)}>Forget spell</Button>
+											<Button onClick={() => handleComplete(t.id)}>Master</Button>
+											<Button onClick={() => handleDelete(t.id)}>Forget spell</Button>
 										</div>
 									</li>
 								))}
@@ -84,7 +89,7 @@ function App() {
 					<section className="right">
 						<h2>The Current Page</h2>
 						<h3>Add a new spell:</h3>
-						<SpellForm onAdd={addSpell} />
+						<SpellForm onAdd={handleAdd} />
 						<h3>Magical diagnostics</h3>
 						<h3>Magical disturbances</h3>
 					</section>

@@ -4,6 +4,8 @@ import { defineConfig } from 'vitest/config';
 // https://vite.dev/config/
 export default defineConfig({
 	plugins: [react()],
-	test: { environment: 'jsdom' },
-	exclude: ['node_modules', 'tests/**']
+	test: {
+		environment: 'jsdom',
+		exclude: ['node_modules', 'tests/**']
+	}
 });
